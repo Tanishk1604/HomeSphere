@@ -27,7 +27,7 @@ export default function About() {
         <p className="text-slate-600">
           <strong>By:</strong> Tanishk Vaze <br />
           <strong>Roll No:</strong> 1032222116, G3 <br />
-          <strong>Project:</strong> MERN Stack Project for FSD
+          <strong>Project:</strong> HomeSphere  (MERN Stack Project for FSD)
         </p>
         <img
           src="/Tanishk.png" // Replace this with your actual image path

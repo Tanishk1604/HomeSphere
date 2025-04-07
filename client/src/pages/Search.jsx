@@ -1,6 +1,17 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ListingItem from "../components/ListingItem";
+import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
+  SelectValue,
+} from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
 //Search Page
 export default function Search() {
   const navigate = useNavigate();
@@ -132,101 +143,104 @@ export default function Search() {
       <div className="p-7  border-b-2 md:border-r-2 md:min-h-screen">
         <form onSubmit={handleSubmit} className="flex flex-col gap-8">
           <div className="flex items-center gap-2">
-            <label className="whitespace-nowrap font-semibold">
+            <Label
+              htmlFor="searchTerm"
+              className="whitespace-nowrap font-semibold"
+            >
               Search Term:
-            </label>
-            <input
+            </Label>
+            <Input
               type="text"
               id="searchTerm"
               placeholder="Search..."
-              className="border rounded-lg p-3 w-full"
               value={sidebardata.searchTerm}
               onChange={handleChange}
+              className="w-full"
             />
           </div>
+
           <div className="flex gap-2 flex-wrap items-center">
-            <label className="font-semibold">Type:</label>
-            <div className="flex gap-2">
-              <input
-                type="checkbox"
-                id="all"
-                className="w-5"
-                onChange={handleChange}
-                checked={sidebardata.type === "all"}
-              />
-              <span>Rent & Sale</span>
-            </div>
-            <div className="flex gap-2">
-              <input
-                type="checkbox"
-                id="rent"
-                className="w-5"
-                onChange={handleChange}
-                checked={sidebardata.type === "rent"}
-              />
-              <span>Rent</span>
-            </div>
-            <div className="flex gap-2">
-              <input
-                type="checkbox"
-                id="sale"
-                className="w-5"
-                onChange={handleChange}
-                checked={sidebardata.type === "sale"}
-              />
-              <span>Sale</span>
-            </div>
-            <div className="flex gap-2">
-              <input
-                type="checkbox"
+            <Label className="font-semibold">Type:</Label>
+            {["all", "rent", "sale"].map((type) => (
+              <div className="flex items-center gap-2" key={type}>
+                <Checkbox
+                  id={type}
+                  checked={sidebardata.type === type}
+                  onCheckedChange={() =>
+                    setSidebardata({ ...sidebardata, type: type })
+                  }
+                />
+                <Label htmlFor={type} className="capitalize">
+                  {type === "all" ? "Rent & Sale" : type}
+                </Label>
+              </div>
+            ))}
+            <div className="flex items-center gap-2">
+              <Checkbox
                 id="offer"
-                className="w-5"
-                onChange={handleChange}
                 checked={sidebardata.offer}
+                onCheckedChange={(checked) =>
+                  setSidebardata({ ...sidebardata, offer: checked })
+                }
               />
-              <span>Offer</span>
+              <Label htmlFor="offer">Offer</Label>
             </div>
           </div>
+
           <div className="flex gap-2 flex-wrap items-center">
-            <label className="font-semibold">Amenities:</label>
-            <div className="flex gap-2">
-              <input
-                type="checkbox"
+            <Label className="font-semibold">Amenities:</Label>
+            <div className="flex items-center gap-2">
+              <Checkbox
                 id="parking"
-                className="w-5"
-                onChange={handleChange}
                 checked={sidebardata.parking}
+                onCheckedChange={(checked) =>
+                  setSidebardata({ ...sidebardata, parking: checked })
+                }
               />
-              <span>Parking</span>
+              <Label htmlFor="parking">Parking</Label>
             </div>
-            <div className="flex gap-2">
-              <input
-                type="checkbox"
+            <div className="flex items-center gap-2">
+              <Checkbox
                 id="furnished"
-                className="w-5"
-                onChange={handleChange}
                 checked={sidebardata.furnished}
+                onCheckedChange={(checked) =>
+                  setSidebardata({ ...sidebardata, furnished: checked })
+                }
               />
-              <span>Furnished</span>
+              <Label htmlFor="furnished">Furnished</Label>
             </div>
           </div>
+
           <div className="flex items-center gap-2">
-            <label className="font-semibold">Sort:</label>
-            <select
-              onChange={handleChange}
-              defaultValue={"created_at_desc"}
-              id="sort_order"
-              className="border rounded-lg p-3"
+            <Label htmlFor="sort_order" className="font-semibold">
+              Sort:
+            </Label>
+            <Select
+              onValueChange={(value) => {
+                const [sort, order] = value.split("_");
+                setSidebardata({ ...sidebardata, sort, order });
+              }}
+              defaultValue="createdAt_desc"
             >
-              <option value="regularPrice_desc">Price high to low</option>
-              <option value="regularPrice_asc">Price low to hight</option>
-              <option value="createdAt_desc">Latest</option>
-              <option value="createdAt_asc">Oldest</option>
-            </select>
+              <SelectTrigger className="w-[220px]" id="sort_order">
+                <SelectValue placeholder="Sort by" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="regularPrice_desc">
+                  Price high to low
+                </SelectItem>
+                <SelectItem value="regularPrice_asc">
+                  Price low to high
+                </SelectItem>
+                <SelectItem value="createdAt_desc">Latest</SelectItem>
+                <SelectItem value="createdAt_asc">Oldest</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
-          <button className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95">
+
+          <Button type="submit" className="uppercase">
             Search
-          </button>
+          </Button>
         </form>
       </div>
       <div className="flex-1">
