@@ -30,9 +30,12 @@ app.use(express.json());
 
 app.use(cookieParser());
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server is running on Port ${process.env.PORT}!`);
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server is running on Port ${PORT}!`);
 });
+
 
 app.use("/api/user", userRouter); //api/user
 app.use("/api/auth", authRouter); //api/auth
