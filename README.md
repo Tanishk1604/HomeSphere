@@ -49,9 +49,9 @@ HomeSphere is a modern, full-featured real estate web application built using th
 
 ## 📸 Screenshots
 > ![image](https://github.com/user-attachments/assets/2e3b62c4-992c-48b8-971a-210ff0134dee)
-> ![image](https://github.com/user-attachments/assets/6e0e72f9-fede-4a27-b8c3-9e219a1f6c15)
+> ![image](https://github.com/user-attachments/assets/0e89b05f-7665-4f78-8c2a-f8fe8020caba)
 > ![image](https://github.com/user-attachments/assets/934caa1d-8289-4cdb-9301-7126b8260504)
-> ![image](https://github.com/user-attachments/assets/ae6252e6-9c8b-4274-8bbc-2c91ed120b57)
+> ![image](https://github.com/user-attachments/assets/4a1b48b7-3211-418e-9f37-34692e710996)
 > ![image](https://github.com/user-attachments/assets/e13a1f5c-7b7e-4821-940e-5c5c1df1046a)
 
 
